@@ -5,12 +5,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --secondary: #dcffb6;
+  --primary: #072424;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --secondary: #dcffb6 /* #E5F780; */
+    --primary: #072424;
   }
 }
 
@@ -19,3 +23,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.primary-focus {
+  @apply hover:bg-primary-light hover:text-secondary-light focus:outline-none focus:ring-2 focus:ring-secondary-focus focus:ring-offset-1 focus:ring-offset-secondary
+}
+
+.primary-control {
+  @apply bg-primary text-secondary
+}
+
+.primary-button {
+  @apply bg-primary-light text-secondary
+}
+/* nav {
+  background-color: var(--secondary);
+  color: var(--primary);
+} */

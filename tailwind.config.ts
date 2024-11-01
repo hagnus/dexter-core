@@ -14,6 +14,18 @@ const config: Config = {
     },
     extend: {
       colors: {
+        primary: {
+          DEFAULT: "var(--primary)",
+          focus: "#177878",
+          light: "#0b4040",
+          dark: "#031111"
+        },
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          focus: "#e3ffa8",
+          light: "#d1f120",
+          dark: "#92a815"
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
