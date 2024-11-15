@@ -5,8 +5,6 @@ export async function POST(request: Request) {
 
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Allow-Methods': 'GET,DELETE,POST,PUT',
       'Content-Type': 'application/json',
     },

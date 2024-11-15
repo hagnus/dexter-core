@@ -1,3 +1,4 @@
+import { ACCESS_DURATION, SESSION_DURATION } from "app/constants";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
@@ -13,12 +14,12 @@ export function createCookie(type: SESSION, token: string): ResponseCookie {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
-    maxAge: type === SESSION.SESSION_NAME ? 2592000000 : 900000 // 15min
+    maxAge: type === SESSION.SESSION_NAME ? SESSION_DURATION : ACCESS_DURATION
   }
 
-  // if (type === SESSION.SESSION_NAME) {
-  //   cookie.path = '/login'
-  // }
+  if (type === SESSION.SESSION_NAME) {
+    cookie.path = '/login'
+  }
 
   return cookie;
 }
@@ -26,8 +27,8 @@ export function createCookie(type: SESSION, token: string): ResponseCookie {
 export async function createSession(accessToken: string, sessionToken: string) {
   const cookieStore = await cookies();
 
-  cookieStore.set(createCookie(SESSION.SESSION_NAME, accessToken));
-  cookieStore.set(createCookie(SESSION.ACCESS_NAME, sessionToken));
+  cookieStore.set(createCookie(SESSION.SESSION_NAME, sessionToken));
+  cookieStore.set(createCookie(SESSION.ACCESS_NAME, accessToken));
 }
 
 export async function deleteSession() {
@@ -35,4 +36,10 @@ export async function deleteSession() {
 
   cookieStore.delete(SESSION.SESSION_NAME);
   cookieStore.delete(SESSION.ACCESS_NAME);
+}
+
+export async function getSession() {
+  const cookieStore = await cookies();
+
+  return cookieStore.get(SESSION.SESSION_NAME);
 }

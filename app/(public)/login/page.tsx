@@ -6,7 +6,8 @@ import { login } from '@public/login/actions';
 import { EmailRules, LoginInput, PasswordRules } from '@public/login/definitions';
 
 export default function Login() {
-  const { register, handleSubmit, formState: { errors, isLoading } } = useForm<LoginInput>();
+  const { register, handleSubmit, formState } = useForm<LoginInput>();
+  const { errors, isLoading } = formState;
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -68,7 +69,7 @@ export default function Login() {
           <div>
             <button className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm/6 font-semibold primary-button primary-focus"
               aria-disabled={isLoading} type="submit">
-              {isLoading ? 'Submitting...' : 'Sign up'}
+              {isLoading ? 'Submitting...' : 'Sign in'}
             </button>
           </div>
         </form>
