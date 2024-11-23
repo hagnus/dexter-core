@@ -1,5 +1,5 @@
 'use server'
-import { LoginInput, LoginOutput } from '@public/login/definitions';
+import { LoginFields, LoginFormReturn } from '@components/AccessForms/definitions';
 import { redirect } from 'next/navigation';
 import { loginRequest } from '@public/login/services';
 import { createSession } from '@lib/session';
@@ -10,7 +10,8 @@ function AuthenticationError(message: string, type: string) {
   }
 }
 
-export async function login(data: LoginInput): Promise<LoginOutput> {
+export async function login(data: LoginFields): Promise<LoginFormReturn> {
+  console.log('LOGIN ACTION', data);
   const response = await loginRequest(data);
 
   if (!response.ok) {
@@ -29,6 +30,6 @@ export async function login(data: LoginInput): Promise<LoginOutput> {
   }
   
   if (response.ok) {
-    redirect('/dashboard');
+    redirect('/product-maker');
   }
 }
