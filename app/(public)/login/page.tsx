@@ -5,7 +5,7 @@ import { login } from '@public/login/actions';
 
 export default function Login() {
   return (
-    <LoginForm action={login} >
+    <LoginForm onSubmit={login} >
       <Image className="mx-auto w-auto rounded-full" alt="Dexter" src="/DexterIcon.png" width={60} height={60} />
     </LoginForm>
   )

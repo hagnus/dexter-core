@@ -17,9 +17,9 @@ export function createCookie(type: SESSION, token: string): ResponseCookie {
     maxAge: type === SESSION.SESSION_NAME ? SESSION_DURATION : ACCESS_DURATION
   }
 
-  if (type === SESSION.SESSION_NAME) {
-    cookie.path = '/login'
-  }
+  // if (type === SESSION.SESSION_NAME) {
+  //   cookie.path = '/login'
+  // }
 
   return cookie;
 }
@@ -33,9 +33,12 @@ export async function createSession(accessToken: string, sessionToken: string) {
 
 export async function deleteSession() {
   const cookieStore = await cookies();
+  console.log('COOKIES 1', cookieStore);
 
   cookieStore.delete(SESSION.SESSION_NAME);
   cookieStore.delete(SESSION.ACCESS_NAME);
+
+  console.log('COOKIES 2', cookieStore);
 }
 
 export async function getSession() {

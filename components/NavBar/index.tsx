@@ -1,6 +1,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Cancel01Icon, Menu01Icon, Notification01Icon } from "hugeicons-react";
 import Image from 'next/image';
+import { logout } from 'app/(public)/logout/actions';
 
 const user = {
   name: 'Tom Cook',
@@ -10,7 +11,7 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
+  { name: 'Product Maker', href: '/product-maker', current: true },
   { name: 'Team', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
@@ -18,10 +19,10 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Logout', onClick: logout },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -33,8 +34,7 @@ export default function NavBar() {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Image alt="Dexter" src="/DexterIcon.png" width={70} height={70}
-                />
+                <Image alt="Dexter" src="/DexterIcon.png" width={70} height={70} />
               </div>
               <div className="hidden mobile:block">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -80,12 +80,19 @@ export default function NavBar() {
                   >
                     {userNavigation.map((item) => (
                       <MenuItem key={item.name}>
-                        <a
-                          href={item.href}
-                          className="block px-4 py-2 text-sm primary-control data-[focus]:primary-focus"
-                        >
-                          {item.name}
-                        </a>
+                        {
+                          item.href? 
+                          <a
+                            href={item.href}
+                            className="block px-4 py-2 text-sm primary-control data-[focus]:primary-focus">
+                            {item.name}
+                          </a> :
+                          <div
+                            onClick={item.onClick}
+                            className="block px-4 py-2 text-sm primary-control data-[focus]:primary-focus">
+                            {item.name}
+                          </div>
+                        }
                       </MenuItem>
                     ))}
                   </MenuItems>
@@ -145,6 +152,7 @@ export default function NavBar() {
                   key={item.name}
                   as="a"
                   href={item.href}
+                  onClick={item.onClick}
                   className="block rounded-md px-3 py-2 text-base font-medium text-secondary primary-focus"
                 >
                   {item.name}
