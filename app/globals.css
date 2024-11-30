@@ -43,6 +43,10 @@ body {
 .primary-button {
   @apply bg-primary-light text-secondary
 }
+
+.secondary-button {
+  @apply bg-secondary-focus text-primary
+}
 /* nav {
   background-color: var(--secondary);
   color: var(--primary);
